@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class HourlyForcastItem extends StatelessWidget {
   final String time;
   final String temprature;
-  final IconData icon;
+  final Icon icon;
   const HourlyForcastItem({super.key,
   required this.time,
     required this.icon,
@@ -28,7 +28,7 @@ class HourlyForcastItem extends StatelessWidget {
                 fontSize: 16,
               ),),
             const SizedBox(height: 8),
-            Icon( icon ,  size: 32,),
+            Icon(icon.icon, size: 32,),
             const SizedBox(height: 8),
             Text(temprature),
           ],
