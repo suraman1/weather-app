@@ -6,6 +6,7 @@ import 'package:weather_app/pages/weather_screan.dart';
 import 'package:weather_app/services/weather_service.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   await dotenv.load(fileName: '.env');
   runApp(
     ChangeNotifierProvider(

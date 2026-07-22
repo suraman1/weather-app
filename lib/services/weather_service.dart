@@ -31,7 +31,6 @@ class WeatherService extends ChangeNotifier {
       }
       await _fetchForcast();
       notifyListeners();
-
     } catch (e) {
       throw Exception("Unexpected error occured!");
     }
@@ -41,11 +40,18 @@ class WeatherService extends ChangeNotifier {
     try {
       final res = await http.get(
         Uri.parse(
-          "https://api.openweathermap.org/data/2.5/forcast?q=$_currentCity&appid=$_apiKey&units=metric",
+          "https://api.openweathermap.org/data/2.5/forecast?q=$_currentCity&appid=$_apiKey&units=metric",
         ),
       );
       if (res.statusCode == 200) {
-        _forcastData = json.decode(res.body)['list'];
+        final forecasts = json.decode(res.body)['list'];
+        DateTime now = DateTime.now();
+        _forcastData = forecasts.where((forecast) {
+          DateTime date = DateTime.parse(forecast['dt_txt']);
+          return now.year == date.year &&
+              now.month == date.month &&
+              now.day == date.day;
+        }).toList();
       }
     } catch (e) {
       throw Exception("Unexpected error occured!");
