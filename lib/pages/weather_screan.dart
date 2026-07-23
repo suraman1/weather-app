@@ -138,13 +138,14 @@ class _WeatherScreanState extends State<WeatherScrean> {
                           items: cities.map<DropdownMenuItem<String>>((city) {
                             return DropdownMenuItem(
                               value: city,
-                              child: Text(city,
-                               overflow: TextOverflow.ellipsis,
+                              child: Text(
+                                city,
+                                overflow: TextOverflow.ellipsis,
                               ),
                             );
                           }).toList(),
                           onChanged: (city) async {
-                            weatherProvider.setCurrentCity = city.toString();
+                            await weatherProvider.saveCurrentCity(city.toString());
                             await weatherProvider.fetchWeather();
                           },
                         ),
@@ -224,7 +225,7 @@ class _WeatherScreanState extends State<WeatherScrean> {
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
                         AdditionalInfoItem(
-                          icon: Icon(Icons.water_drop, color: Colors.blue), 
+                          icon: Icon(Icons.water_drop, color: Colors.blue),
                           label: 'Humidity',
                           value: '${data['main']['humidity']}',
                         ),

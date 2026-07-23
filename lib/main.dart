@@ -10,7 +10,7 @@ void main() async {
   await dotenv.load(fileName: '.env');
   runApp(
     ChangeNotifierProvider(
-      create: (_) => WeatherService(),
+      create: (_) => WeatherService()..getCurrentCity(),
       child: const MyApp(),
     ),
   );
